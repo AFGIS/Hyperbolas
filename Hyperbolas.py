@@ -68,15 +68,13 @@ with open(csv_file) as csvfile:
             subset_trace = [item]
             trace_number = this_trace_number
 
-    else:
-        header = ['X', 'Y', 'Line', 'Trace', 'Depth/Time', 'Amplitude']
-        create_file(header, closest_points)
-        arcpy.management.MakeXYEventLayer(temp_filename, 'X', 'Y', temp_layer, spatial_reference)
-        arcpy.CopyFeatures_management(temp_layer, output)
+    header = ['X', 'Y', 'Line', 'Trace', 'Depth/Time', 'Amplitude']
+    create_file(header, closest_points)
+    arcpy.management.MakeXYEventLayer(temp_filename, 'X', 'Y', temp_layer, spatial_reference)
+    arcpy.CopyFeatures_management(temp_layer, output)
 
 del subset_trace, closest_points, rows, csvreader, csvfile
 if not save_csv_file:
     arcpy.Delete_management(temp_filename)
-    #os.remove(temp_filename)
 gc.collect()
 
